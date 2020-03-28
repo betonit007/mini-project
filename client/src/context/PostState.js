@@ -37,13 +37,30 @@ const PostState = props => {
     })
   }
 
+  const deletePost = id => {
+    axios.delete(`/api/posts/${id}`)
+
+    dispatch({
+      type: 'DELETE_POST',
+      payload: id
+    })
+  }
+
+  const loading = () => {
+    dispatch({
+      type: 'SET_LOADING'
+    })
+  }
+
   return (
     <PostContext.Provider
       value={{
         posts: state.posts,
         currentPost: state.currentPost,
         addPost,
-        getPosts
+        getPosts,
+        deletePost,
+        loading
       }}
     >
       {props.children}

@@ -12,6 +12,9 @@ const CreatePostForm = () => {
   const handleSubmit = e => {
     e.preventDefault();
     addPost({ title, body, author })
+    setTitle("")
+    setBody("")
+    setAuthor("")
   };
 
   return (

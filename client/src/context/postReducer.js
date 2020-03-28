@@ -12,6 +12,11 @@ export default(state, action) => {
                 ...state,
                 posts: action.payload
             }
+        case 'DELETE_POST':
+            return {
+                ...state,
+                posts: state.posts.filter(post => post._id !== action.payload) //filter out the existing posts (remember action.payload is the _id of the post we want to delete)
+            }
         default: 
         return state
     }

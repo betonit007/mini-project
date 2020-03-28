@@ -6,7 +6,7 @@ import PostContext from '../../context/postContext'  //importing postContext to 
 
 const PostsList = () => {
 
-  const { posts, getPosts } = useContext(PostContext)  // destructuring the posts array
+  const { posts, getPosts, deletePost } = useContext(PostContext)  // destructuring the posts array
 
   useEffect(() => { // useEffect hook to get all posts on load 
     getPosts() 
@@ -25,7 +25,7 @@ const PostsList = () => {
                   {post.title} by {post.author}
                 </strong>
               </Link>
-              <DeleteBtn onClick={() => {}} />
+              <DeleteBtn onClick={() => deletePost(post._id)} />
             </ListItem>
           ))}
         </List>
