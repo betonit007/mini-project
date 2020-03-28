@@ -10,12 +10,22 @@ export default(state, action) => {
         case 'ALL_POSTS':
             return {
                 ...state,
-                posts: action.payload
+                posts: action.payload  //action.payload = the res.data from our action getPosts() (axios.get call)
             }
         case 'DELETE_POST':
             return {
                 ...state,
                 posts: state.posts.filter(post => post._id !== action.payload) //filter out the existing posts (remember action.payload is the _id of the post we want to delete)
+            }
+        case 'ADD_FAV':
+            return {
+                ...state,
+                favorites: [ ...state.favorites, action.payload] // spread in / add the id of the newly like post.
+            }
+        case 'REMOVE_FAV':
+            return {
+                ...state,
+                favorites: state.favorites.filter(fav => fav !== action.payload)
             }
         default: 
         return state

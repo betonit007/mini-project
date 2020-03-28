@@ -8,12 +8,14 @@ import postContext from '../context/postContext'
 function Detail(props) {
   console.log(props.match.params.id)
 
-  const { posts } = useContext(postContext)
+  const { posts, addToFavorites, favorites, removeFromFavs } = useContext(postContext)
   console.log(posts)
-  const { title, body, author } = posts.find(post => post._id === props.match.params.id)
+  const { title, body, author, _id } = posts.find(post => post._id === props.match.params.id)
 
+  console.log(favorites.indexOf(_id))
   return (
-    <>{/* Replace `true` with the state of your application */}{true ? (
+    <>{/* Replace `true` with the state of your application */}
+    {true ? (
       <Container fluid>
         <Row>
           <Col size="md-12">
@@ -30,10 +32,10 @@ function Detail(props) {
             </article>
           </Col>
           {/* Replace `false` to check if the current post is in the favorites list */}
-          {false ? (
-            <button className="btn btn-danger">Remove from Favorites!</button>
+          { favorites.indexOf(_id) !== -1 ? ( 
+            <button onClick={()=>removeFromFavs(_id)} className="btn btn-danger">Remove from Favorites!</button>
           ) : (
-            <button className="btn">❤️ Add to Favorites</button>
+            <button onClick={(()=>addToFavorites(_id))} className="btn">❤️ Add to Favorites</button>
           )}
         </Row>
         <Row>

@@ -8,6 +8,7 @@ const PostState = props => {
   const initialState = {
     posts: [],
     currentPost: '',
+    favorites: [],
     loading: true
   }
 
@@ -15,7 +16,7 @@ const PostState = props => {
 
 
   const addPost = async formData => {
-    
+
     try {
 
       //verifying that there is a title and auther before submitting
@@ -52,6 +53,20 @@ const PostState = props => {
     })
   }
 
+  const addToFavorites = id => {
+    dispatch({
+      type: 'ADD_FAV',
+      payload: id
+    })
+  }
+
+  const removeFromFavs = id => {
+    dispatch({
+      type: 'REMOVE_FAV',
+      payload: id
+    })
+  }
+
   return (
     <PostContext.Provider
       value={{
@@ -60,7 +75,10 @@ const PostState = props => {
         addPost,
         getPosts,
         deletePost,
-        loading
+        loading,
+        favorites: state.favorites,
+        addToFavorites,
+        removeFromFavs
       }}
     >
       {props.children}
